@@ -7,11 +7,13 @@ if [[ -e .prebuild ]]; then
 fi
 
 if [[ $pmd5 != $md5 ]]; then
-  g++ -std=c++11 $name
   echo "compile" 1>&2
+  g++ -std=c++11 $name
+  if [[ $? != 0 ]];then
+    exit 0
+  fi
   echo $md5 > .prebuild
 fi
-if [ $? -eq 0 ];then
-  echo "run $name" 1>&2
-  ./a.out
-fi
+
+echo "run $name" 1>&2
+./a.out
