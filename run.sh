@@ -3,7 +3,9 @@ name=`find . -type f -name *.cpp | xargs ls -t | head -n 1`
 md5=`md5 -q $name`
 if [[ -e .prebuild ]]; then
   pmd5=`cat .prebuild`
-  echo "$md5\n$pmd5" 1>&2
+  if [[ $1 == '-m' ]]; then
+    echo "$md5\n$pmd5" 1>&2
+  fi
 fi
 
 if [[ $pmd5 != $md5 ]]; then
