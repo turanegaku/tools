@@ -1,5 +1,5 @@
 #!/bin/sh
-name=`ls -t *.cpp | head -n 1`
+name=`find . -type f -name *.cpp | xargs ls -t | head -n 1`
 md5=`md5 -q $name`
 if [[ -e .prebuild ]]; then
   pmd5=`cat .prebuild`
